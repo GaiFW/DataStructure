@@ -148,6 +148,10 @@ void selNode(Node_p head, float price)
 			len++;
 			arr = realloc(arr, sizeof(float) * len);
 			arr[len - 1] = tmp->good.price - price;
+			if(arr[len-1]<0)
+			{
+				arr[len-1] = -arr[len-1];
+			}
 
 			tmp = tmp->next;
 		}
@@ -174,32 +178,19 @@ void selNode(Node_p head, float price)
 		//找绝对值最小的下标
 		float min = arr[len - 1];
 		int mi=0;
-		int z_f = 0;
+		// int z_f = 0;
 		for (int i = 0; i < len; i++)
 		{
-			if (arr[i] < 0)
+			if (min > arr[i])
 			{
-				if (min > -arr[i])
-				{
-					z_f = 0;
-					min = -arr[i];
-					mi = i;
-				}
-
-			}
-			else
-			{
-				if (min > arr[i])
-				{
-					z_f = 1;
-					min = arr[i];
-					mi = i;
-				}
+				// z_f = 1;
+				min = arr[i];
+				mi = i;
 			}
 		}
 		printf("22%.2f\n", min );
-		if (!z_f)
-		{min = -min;}
+		// if (!z_f)
+		// {min = -min;}
 		if(mi == 0)
 		{
 			tmp = head->next;
@@ -220,7 +211,7 @@ void selNode(Node_p head, float price)
 		}
 		else if(mi == 1)
 		{
-			if(arr[mi]-arr[mi-1]>arr[mi+2]-arr[mi])
+			if(arr[mi-1]>arr[mi+2])
 			{
 				tmp = head->next->next;
 				for (int i = 0; i < 3; i++)
@@ -241,7 +232,7 @@ void selNode(Node_p head, float price)
 		}
 		else if(mi == len-2)
 		{
-			if(arr[mi+1]-arr[mi]>arr[mi]-arr[mi-2])
+			if(arr[mi+1]>arr[mi-2])
 			{
 				tmp = head->prev->prev->prev;
 				for (int i = 0; i < 3; i++)
@@ -267,9 +258,9 @@ void selNode(Node_p head, float price)
 			{
 				if (tmp->good.price - price == min )
 				{
-					if(arr[mi]-arr[mi-1] > arr[mi+1]-arr[mi])
+					if(arr[mi-1] > arr[mi+1])
 					{
-						if(arr[mi]-arr[mi-1] > arr[mi+2]-arr[mi])
+						if(arr[mi-1] > arr[mi+2])
 						{
 							//找mi 往后3个
 							printf("11111\n");
@@ -292,7 +283,7 @@ void selNode(Node_p head, float price)
 					}
 					else
 					{
-						if(arr[mi+1]-arr[mi]>arr[mi]-arr[mi-2])
+						if(arr[mi+1]>arr[mi-2])
 						{
 							//mi最后一个
 							tmp = tmp->prev->prev;
