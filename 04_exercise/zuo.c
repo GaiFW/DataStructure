@@ -50,14 +50,15 @@ int main()
 {
 	Node_p head = headNode();
 
-	for(int i=0; i<10;i++)
-	{
-		Node_p new = newNode(i+1);
-		list_add_tail( &(new->list),&(head->list));
-	}
+    for(int i=0; i<10;i++)
+    {
+        Node_p new = newNode(i+1);
+        list_add_tail( &(new->list),&(head->list));
+    }
 
-	display(head);
-	Node_p pos = NULL;
+
+    displaj(head);
+    Node_p pos = NULL;
 	Node_p n = NULL;
 	list_for_each_entry_safe(pos, n, &(head->list), list)
 	{
