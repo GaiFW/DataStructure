@@ -75,16 +75,15 @@ int main()
     Stack_p theStack = stack_init(5);
 //    func(theStack,123);
     int n = 123;
-    do
+    while(1)
     {
         push(theStack,n%8);
         if(n==0)
         {
         break;
         }
-        n = n/8;
-        
-    }while(1);
+        n = n/8;   
+    };
     int n1 = theStack->top;
     for(int i=0;i<=n1;i++)
     {
